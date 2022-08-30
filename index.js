@@ -5,15 +5,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const user = {};
+const users = [];
 
 app.post('/sign-up', (req, res) => {
-  user = req.body;
+  const user = req.body;
+  users.push(user);
   res.send(user);
 });
 
 app.get('/sign-up', (req, res) => {
-  res.send(user);
+  res.send(users);
 });
 
 app.listen(5000);
