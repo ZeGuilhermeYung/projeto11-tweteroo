@@ -5,8 +5,26 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const users = [];
-const tweets = [];
+const users = [
+  {
+    username: "bobesponja",
+	  avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info"
+  },
+  {
+    username: "Harry Potter",
+    avatar: "https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
+  }
+];
+const tweets = [
+  {
+    username: "bobesponja",
+    tweet: "eu amo o hub"
+  },
+  {
+    username: "Harry Potter",
+    tweet: "num sei"
+  }
+];
 
 app.post('/sign-up', (req, res) => {
   const user = req.body;
@@ -20,7 +38,14 @@ app.get('/sign-up', (req, res) => {
 
 app.post('/tweets', (req, res) => {
   const tweet = req.body;
-  tweets.push(tweet);
+  const avatar = users.find(user => user.username === tweet.username).avatar;
+  tweets.push(
+    {
+      username: tweet.username,
+      tweet: tweet.tweet,
+      avatar: avatar
+    }
+  );
   res.send(console.log("OK"));
 });
 
